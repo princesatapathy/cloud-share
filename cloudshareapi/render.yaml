@@ -1,0 +1,19 @@
+services:
+  - type: web
+    name: cloud-share-api-render
+    runtime: docker
+    plan: free
+    healthCheckPath: /api/v1.0/health
+    envVars:
+      - key: MONGODB_URI
+        sync: false
+      - key: CLERK_ISSUER
+        value: https://cool-snipe-97.clerk.accounts.dev
+      - key: CLERK_JWKS_URL
+        value: https://cool-snipe-97.clerk.accounts.dev/.well-known/jwks.json
+      - key: CLERK_WEBHOOK_SECRET
+        sync: false
+      - key: RAZORPAY_KEY_ID
+        value: rzp_test_Su2Qmczza6uFwP
+      - key: RAZORPAY_KEY_SECRET
+        sync: false

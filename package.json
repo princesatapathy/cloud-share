@@ -1,0 +1,8 @@
+{
+  "name": "cloud-share",
+  "private": true,
+  "scripts": {
+    "build": "npm --prefix cloudsharewebapp run build",
+    "install:web": "npm --prefix cloudsharewebapp ci"
+  }
+}

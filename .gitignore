@@ -1,0 +1,35 @@
+.env
+.env.*
+!.env.example
+
+# Java / Maven
+target/
+build/
+*.class
+
+# Node / Vite
+node_modules/
+dist/
+dist-ssr/
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+pnpm-debug.log*
+
+# IDE / OS
+.idea/
+.vscode/
+.DS_Store
+*.iws
+*.iml
+*.ipr
+
+# App runtime data
+uploads/
+upload/
+
+# Local repo backups
+.repo-backup/
