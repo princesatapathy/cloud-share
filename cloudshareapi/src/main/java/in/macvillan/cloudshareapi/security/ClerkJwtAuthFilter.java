@@ -34,11 +34,15 @@ public class ClerkJwtAuthFilter extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
 
-        // For webhook endpoints, skip JWT validation and continue the filter chain
-        if (request.getRequestURI().contains("/webhooks") ||
-                request.getRequestURI().contains("/public") ||
-                    request.getRequestURI().contains("/download") ||
-                        request.getRequestURI().contains("/health")) {
+        String path = request.getRequestURI().substring(request.getContextPath().length());
+
+        // For public endpoints, skip JWT validation and continue the filter chain
+        if (path.isEmpty() ||
+                path.equals("/") ||
+                path.startsWith("/webhooks") ||
+                path.startsWith("/files/public") ||
+                path.startsWith("/files/download") ||
+                path.startsWith("/health")) {
             filterChain.doFilter(request, response);
             return;
         }
