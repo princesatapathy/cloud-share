@@ -3,7 +3,7 @@
   "buildCommand": "npm run build",
   "outputDirectory": "dist",
   "env": {
-    "VITE_API_BASE_URL": "https://cloud-share-api-render.onrender.com/api/v1.0",
+    "VITE_API_BASE_URL": "https://cloud-share-api-ffmt.onrender.com/api/v1.0",
     "VITE_CLERK_PUBLISHABLE_KEY": "pk_test_Y29vbC1zbm1wZS05Ny5jbGVyay5hY2NvdW50cy5kZXYk",
     "VITE_RAZORPAY_KEY": "rzp_test_Su2Qmczza6uFwP"
   }
