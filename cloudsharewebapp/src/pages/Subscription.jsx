@@ -1,6 +1,6 @@
 import DashboardLayout from "../layout/DashboardLayout.jsx";
 import {useContext, useEffect, useRef, useState} from "react";
-import {useAuth, useUser} from "@clerk/clerk-react";
+import {useAuth, useUser} from "@clerk/react";
 import {UserCreditsContext} from "../context/UserCreditsContext.jsx";
 import axios from "axios";
 import {apiEndpoints} from "../util/apiEndpoints.js";

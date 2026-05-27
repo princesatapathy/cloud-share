@@ -1,6 +1,6 @@
 import DashboardLayout from "../layout/DashboardLayout.jsx";
 import {useContext, useState} from "react";
-import {useAuth} from "@clerk/clerk-react";
+import {useAuth} from "@clerk/react";
 import {UserCreditsContext} from "../context/UserCreditsContext.jsx";
 import {AlertCircle} from "lucide-react";
 import axios from "axios";

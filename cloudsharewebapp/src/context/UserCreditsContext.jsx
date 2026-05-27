@@ -1,5 +1,5 @@
 import {createContext, useCallback, useEffect, useState} from "react";
-import {useAuth} from "@clerk/clerk-react";
+import {useAuth} from "@clerk/react";
 import axios from "axios";
 import {apiEndpoints} from "../util/apiEndpoints.js";
 import toast from "react-hot-toast";

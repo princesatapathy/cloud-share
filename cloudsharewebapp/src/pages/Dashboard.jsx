@@ -1,5 +1,5 @@
 import DashboardLayout from "../layout/DashboardLayout.jsx";
-import {useAuth} from "@clerk/clerk-react";
+import {useAuth} from "@clerk/react";
 import {useContext, useEffect, useState} from "react";
 import {UserCreditsContext} from "../context/UserCreditsContext.jsx";
 import axios from "axios";

@@ -1,7 +1,7 @@
 import {useContext, useEffect, useState} from "react";
-import {Menu, Share2, Wallet, X} from "lucide-react";
+import {Menu, Share2, X} from "lucide-react";
 import {Link} from "react-router-dom";
-import {SignedIn, UserButton} from "@clerk/clerk-react";
+import {Show, UserButton} from "@clerk/react";
 import SideMenu from "./SideMenu.jsx";
 import CreditsDisplay from "./CreditsDisplay.jsx";
 import {UserCreditsContext} from "../context/UserCreditsContext.jsx";
@@ -37,7 +37,7 @@ const Navbar = ({activeMenu}) => {
             </div>
 
             {/* Right side - credits and user button*/}
-            <SignedIn>
+            <Show when="signed-in">
                 <div className="flex items-center gap-4">
                     <Link to="/subscriptions">
                         <CreditsDisplay credits={credits} />
@@ -46,7 +46,7 @@ const Navbar = ({activeMenu}) => {
                         <UserButton />
                     </div>
                 </div>
-            </SignedIn>
+            </Show>
 
             {/* Mobile side menu */}
             {openSideMenu && (

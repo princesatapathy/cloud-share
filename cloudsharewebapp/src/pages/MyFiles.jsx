@@ -1,7 +1,7 @@
 import DashboardLayout from "../layout/DashboardLayout.jsx";
 import {useEffect, useState} from "react";
 import { File, FileIcon, FileText, Grid, Image, List, Music, Video } from "lucide-react";
-import {useAuth} from "@clerk/clerk-react";
+import {useAuth} from "@clerk/react";
 import axios from "axios";
 import toast from "react-hot-toast";
 import {useNavigate} from "react-router-dom";

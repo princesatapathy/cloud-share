@@ -1,6 +1,7 @@
 import {assets} from "../../assets/assets.js";
+import {SignInButton, SignUpButton} from "@clerk/react";
 
-const HeroSection = ({openSignIn, openSignUp}) => {
+const HeroSection = () => {
     return (
         <div className="landing-page-content relative">
             <div className="absolute inset-0 bg-gradient-to-r from-purple-50 to-indigo-50 opacity-80 z-0 pointer-events-none"></div>
@@ -16,12 +17,14 @@ const HeroSection = ({openSignIn, openSignUp}) => {
                         </p>
                         <div className="mt-10 max-w-sm mx-auto sm:max-w-none sm:flex sm:justify-center">
                             <div className="space-y-4 sm:space-y-0 sm:mx-auto sm:inline-grid sm:grid-cols-2 sm:gap-5">
-                                <button
-                                    onClick={() => openSignUp()}
-                                    className="flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-purple-500 hover:bg-purple-600 md:py-4 md:text-lg md:px-10 transition-all duration-200 shadow-lg hover:shadow-xl">Get Started</button>
-                                <button
-                                    onClick={() => openSignIn()}
-                                    className="flex items-center justify-center px-6 py-3 border border-gray-300 text-base font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 md:py-4 md:text-lg md:px-10 transition-all duration-200 shadow-md hover:shadow-lg">Sign In</button>
+                                <SignUpButton mode="modal">
+                                    <button
+                                        className="flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-purple-500 hover:bg-purple-600 md:py-4 md:text-lg md:px-10 transition-all duration-200 shadow-lg hover:shadow-xl">Get Started</button>
+                                </SignUpButton>
+                                <SignInButton mode="modal">
+                                    <button
+                                        className="flex items-center justify-center px-6 py-3 border border-gray-300 text-base font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 md:py-4 md:text-lg md:px-10 transition-all duration-200 shadow-md hover:shadow-lg">Sign In</button>
+                                </SignInButton>
                             </div>
                         </div>
                     </div>

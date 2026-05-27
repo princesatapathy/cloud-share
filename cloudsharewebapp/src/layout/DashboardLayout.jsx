@@ -1,4 +1,4 @@
-import {useUser} from "@clerk/clerk-react";
+import {useUser} from "@clerk/react";
 import Navbar from "../components/Navbar.jsx";
 import SideMenu from "../components/SideMenu.jsx";
 

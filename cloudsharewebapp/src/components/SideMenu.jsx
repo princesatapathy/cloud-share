@@ -1,4 +1,4 @@
-import {useUser} from "@clerk/clerk-react";
+import {useUser} from "@clerk/react";
 import {User} from "lucide-react";
 import {SIDE_MENU_DATA} from "../assets/data.js";
 import {useNavigate} from "react-router-dom";

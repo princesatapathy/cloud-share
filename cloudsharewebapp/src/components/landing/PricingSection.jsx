@@ -1,6 +1,7 @@
 import {Check} from "lucide-react";
+import {SignUpButton} from "@clerk/react";
 
-const PricingSection = ({pricingPlans, openSignUp}) => {
+const PricingSection = ({pricingPlans}) => {
     return (
         <div className="py-20 bg-gray-50">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -9,7 +10,7 @@ const PricingSection = ({pricingPlans, openSignUp}) => {
                         Simple, Transparent Pricing
                     </h2>
                     <p className="mt-4 max-w-2xl mx-auto text-xl text-gray-500">
-                        Choose the plan that's right for you
+                        Choose the plan that&apos;s right for you
                     </p>
                 </div>
 
@@ -48,11 +49,12 @@ const PricingSection = ({pricingPlans, openSignUp}) => {
                                     ))}
                                 </ul>
                                 <div className="rounded-md shadow">
-                                    <button
-                                        onClick={() => openSignUp()}
-                                        className={`w-full flex items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-md ${plan.highlighted ? 'text-white bg-purple-500 hover:bg-purple-600': 'text-purple-600 bg-white hover:bg-gray-50 border-purple-500'} transition-colors duration-200`}>
-                                        {plan.cta}
-                                    </button>
+                                    <SignUpButton mode="modal">
+                                        <button
+                                            className={`w-full flex items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-md ${plan.highlighted ? 'text-white bg-purple-500 hover:bg-purple-600': 'text-purple-600 bg-white hover:bg-gray-50 border-purple-500'} transition-colors duration-200`}>
+                                            {plan.cta}
+                                        </button>
+                                    </SignUpButton>
                                 </div>
                             </div>
                         </div>

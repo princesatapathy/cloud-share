@@ -5,10 +5,16 @@ import Upload from "./pages/Upload.jsx";
 import MyFiles from "./pages/MyFiles.jsx";
 import Subscription from "./pages/Subscription.jsx";
 import Transactions from "./pages/Transactions.jsx";
-import {RedirectToSignIn, SignedIn, SignedOut} from "@clerk/clerk-react";
+import {RedirectToSignIn, Show} from "@clerk/react";
 import {Toaster} from "react-hot-toast";
 import {UserCreditsProvider} from "./context/UserCreditsContext.jsx";
 import PublicFileView from "./pages/PublicFileView.jsx";
+
+const protectedRoute = (element) => (
+    <Show when="signed-in" fallback={<RedirectToSignIn />}>
+        {element}
+    </Show>
+);
 
 const App = () => {
     return (
@@ -18,34 +24,19 @@ const App = () => {
                 <Routes>
                     <Route path="/" element={<Landing />} />
                     <Route path="/dashboard" element={
-                        <>
-                            <SignedIn><Dashboard /></SignedIn>
-                            <SignedOut><RedirectToSignIn /></SignedOut>
-                        </>
+                        protectedRoute(<Dashboard />)
                     } />
                     <Route path="/upload" element={
-                        <>
-                            <SignedIn><Upload /></SignedIn>
-                            <SignedOut><RedirectToSignIn /></SignedOut>
-                        </>
+                        protectedRoute(<Upload />)
                     } />
                     <Route path="/my-files" element={
-                        <>
-                            <SignedIn><MyFiles /></SignedIn>
-                            <SignedOut><RedirectToSignIn /></SignedOut>
-                        </>
+                        protectedRoute(<MyFiles />)
                     } />
                     <Route path="/subscriptions" element={
-                        <>
-                            <SignedIn><Subscription /></SignedIn>
-                            <SignedOut><RedirectToSignIn /></SignedOut>
-                        </>
+                        protectedRoute(<Subscription />)
                     } />
                     <Route path="/transactions" element={
-                        <>
-                            <SignedIn><Transactions /></SignedIn>
-                            <SignedOut><RedirectToSignIn /></SignedOut>
-                        </>
+                        protectedRoute(<Transactions />)
                     } />
                     <Route path="file/:fileId" element={
                         <>
