@@ -5,6 +5,7 @@ import in.macvillan.cloudshareapi.document.ProfileDocument;
 import in.macvillan.cloudshareapi.dto.FileMetadataDTO;
 import in.macvillan.cloudshareapi.repository.FileMetadataRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
@@ -29,6 +30,9 @@ public class FileMetadataService {
     private final UserCreditsService userCreditsService;
     private final FileMetadataRepository fileMetadataRepository;
 
+    @Value("${app.upload-dir:upload}")
+    private String uploadDir;
+
     public List<FileMetadataDTO> uploadFiles(MultipartFile files[]) throws IOException {
         ProfileDocument currentProfile = profileService.getCurrentProfile();
         List<FileMetadataDocument> savedFiles = new ArrayList<>();
@@ -37,7 +41,7 @@ public class FileMetadataService {
             throw new RuntimeException("Not enough credits to upload files. Please purchase more credits");
         }
 
-        Path uploadPath = Paths.get("upload").toAbsolutePath().normalize();
+        Path uploadPath = Paths.get(uploadDir).toAbsolutePath().normalize();
         Files.createDirectories(uploadPath);
 
         for (MultipartFile file : files) {
