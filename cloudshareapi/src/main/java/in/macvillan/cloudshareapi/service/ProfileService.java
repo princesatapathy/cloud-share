@@ -102,6 +102,22 @@ public class ProfileService {
         }
 
         String clerkId = SecurityContextHolder.getContext().getAuthentication().getName();
-        return profileRepository.findByClerkId(clerkId);
+        ProfileDocument profile = profileRepository.findByClerkId(clerkId);
+
+        if (profile != null) {
+            return profile;
+        }
+
+        ProfileDocument fallbackProfile = ProfileDocument.builder()
+                .clerkId(clerkId)
+                .email(clerkId + "@clerk.local")
+                .firstName("")
+                .lastName("")
+                .photoUrl("")
+                .credits(5)
+                .createdAt(Instant.now())
+                .build();
+
+        return profileRepository.save(fallbackProfile);
     }
 }
