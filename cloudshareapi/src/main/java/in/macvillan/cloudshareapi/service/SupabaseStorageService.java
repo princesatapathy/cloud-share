@@ -1,6 +1,7 @@
 package in.macvillan.cloudshareapi.service;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.*;
 import org.springframework.stereotype.Service;
@@ -10,6 +11,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class SupabaseStorageService {
@@ -40,9 +42,11 @@ public class SupabaseStorageService {
 
     public void validateFileType(String mimeType, String fileName) {
         if (mimeType == null || !ALLOWED_MIME.contains(mimeType)) {
+            log.warn("File type rejected: mimeType={}, fileName={}", mimeType, fileName);
             throw new RuntimeException("File type not allowed: " + mimeType);
         }
         if (fileName != null && (fileName.contains("..") || fileName.contains("/"))) {
+            log.warn("Invalid file name rejected: fileName={}", fileName);
             throw new RuntimeException("Invalid file name");
         }
     }
@@ -83,6 +87,7 @@ public class SupabaseStorageService {
      * Delete a file from Supabase Storage.
      */
     public void deleteFile(String path) {
+        log.info("Deleting file from Supabase: path={}", path);
         String url = supabaseUrl + "/storage/v1/object/" + bucket;
 
         HttpHeaders headers = buildHeaders();

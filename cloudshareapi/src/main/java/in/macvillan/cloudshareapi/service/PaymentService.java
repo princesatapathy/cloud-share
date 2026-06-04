@@ -8,6 +8,7 @@ import in.macvillan.cloudshareapi.dto.PaymentDTO;
 import in.macvillan.cloudshareapi.dto.PaymentVerificationDTO;
 import in.macvillan.cloudshareapi.repository.PaymentTransactionRepository;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -19,6 +20,7 @@ import java.security.NoSuchAlgorithmException;
 import java.time.LocalDateTime;
 import java.util.Formatter;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class PaymentService {
@@ -45,6 +47,7 @@ public class PaymentService {
 
             Order order = razorpayClient.orders.create(orderRequest);
             String orderId = order.get("id");
+            log.info("Razorpay order created: orderId={}, clerkId={}, amount={}", orderId, clerkId, paymentDTO.getAmount());
 
             //create pending transaction record
             PaymentTransaction transaction = PaymentTransaction.builder()
@@ -68,6 +71,7 @@ public class PaymentService {
                     .build();
 
         }catch (Exception e) {
+            log.error("Order creation failed", e);
             return PaymentDTO.builder()
                     .success(false)
                     .message("Error creating order: "+e.getMessage())
@@ -83,6 +87,7 @@ public class PaymentService {
             String data = request.getRazorpay_order_id()+ "|" +request.getRazorpay_payment_id();
             String generatedSignature = generateHmacSha256Signature(data, razorpayKeySecret);
             if (!generatedSignature.equals(request.getRazorpay_signature())) {
+                log.warn("Payment signature mismatch: orderId={}, clerkId={}", request.getRazorpay_order_id(), clerkId);
                 updateTransactionStatus(request.getRazorpay_order_id(), "FAILED", request.getRazorpay_payment_id(), null);
                 return PaymentDTO.builder()
                         .success(false)
@@ -106,6 +111,7 @@ public class PaymentService {
             }
 
             if (creditsToAdd > 0) {
+                log.info("Payment verified: orderId={}, clerkId={}, plan={}, creditsToAdd={}", request.getRazorpay_order_id(), clerkId, plan, creditsToAdd);
                 userCreditsService.addCredits(clerkId, creditsToAdd, plan);
                 updateTransactionStatus(request.getRazorpay_order_id(), "SUCCESS", request.getRazorpay_payment_id(), creditsToAdd);
                 return PaymentDTO.builder()

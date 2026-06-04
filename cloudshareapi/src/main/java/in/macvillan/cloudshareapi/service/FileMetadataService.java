@@ -5,6 +5,7 @@ import in.macvillan.cloudshareapi.document.ProfileDocument;
 import in.macvillan.cloudshareapi.dto.FileMetadataDTO;
 import in.macvillan.cloudshareapi.repository.FileMetadataRepository;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
@@ -14,6 +15,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class FileMetadataService {
@@ -28,6 +30,7 @@ public class FileMetadataService {
      */
     public FileMetadataDTO saveFromSupabase(String supabasePath, String fileUrl,
             String name, String type, long size, String clerkId) {
+        log.info("Saving file metadata: name={}, type={}, size={}, clerkId={}", name, type, size, clerkId);
         FileMetadataDocument doc = FileMetadataDocument.builder()
                 .supabasePath(supabasePath)
                 .fileUrl(fileUrl)
@@ -38,7 +41,9 @@ public class FileMetadataService {
                 .isPublic(false)
                 .uploadedAt(LocalDateTime.now())
                 .build();
-        return mapToDTO(fileMetadataRepository.save(doc));
+        FileMetadataDocument saved = fileMetadataRepository.save(doc);
+        log.info("File metadata saved: id={}", saved.getId());
+        return mapToDTO(saved);
     }
 
     public FileMetadataDTO mapToDTO(FileMetadataDocument doc) {
@@ -85,10 +90,12 @@ public class FileMetadataService {
 
     public void deleteFile(String id) {
         ProfileDocument currentProfile = profileService.getCurrentProfile();
+        log.info("Delete requested: fileId={}, requestedBy={}", id, currentProfile.getClerkId());
         FileMetadataDocument file = fileMetadataRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("File not found"));
 
         if (!file.getClerkId().equals(currentProfile.getClerkId())) {
+            log.warn("Unauthorized delete attempt: fileId={}, owner={}, attacker={}", id, file.getClerkId(), currentProfile.getClerkId());
             throw new RuntimeException("File does not belong to current user");
         }
 
@@ -97,11 +104,12 @@ public class FileMetadataService {
             try {
                 supabaseStorageService.deleteFile(file.getSupabasePath());
             } catch (Exception e) {
-                // Log but don't block deletion of metadata
+                log.error("Supabase delete failed for path={}, proceeding with metadata deletion", file.getSupabasePath(), e);
             }
         }
 
         fileMetadataRepository.deleteById(id);
+        log.info("File deleted: fileId={}", id);
     }
 
     public FileMetadataDTO togglePublic(String id) {
@@ -110,11 +118,13 @@ public class FileMetadataService {
                 .orElseThrow(() -> new RuntimeException("File not found"));
 
         if (!file.getClerkId().equals(currentProfile.getClerkId())) {
+            log.warn("Unauthorized togglePublic attempt: fileId={}, owner={}, attacker={}", id, file.getClerkId(), currentProfile.getClerkId());
             throw new RuntimeException("File does not belong to current user");
         }
 
         file.setIsPublic(!file.getIsPublic());
         fileMetadataRepository.save(file);
+        log.info("File visibility toggled: fileId={}, isPublic={}", id, file.getIsPublic());
         return mapToDTO(file);
     }
 }

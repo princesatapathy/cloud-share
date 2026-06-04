@@ -8,6 +8,7 @@ import in.macvillan.cloudshareapi.service.FileMetadataService;
 import in.macvillan.cloudshareapi.service.ProfileService;
 import in.macvillan.cloudshareapi.service.SupabaseStorageService;
 import in.macvillan.cloudshareapi.service.UserCreditsService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -33,7 +34,7 @@ public class FileController {
      * Client uploads directly to Supabase — server never receives file bytes.
      */
     @PostMapping("/upload/initiate")
-    public ResponseEntity<?> initiateUpload(@RequestBody InitiateUploadDTO dto) {
+    public ResponseEntity<?> initiateUpload(@Valid @RequestBody InitiateUploadDTO dto) {
         supabaseStorageService.validateFileType(dto.getMimeType(), dto.getFileName());
 
         if (!userCreditsService.hasEnoughCredits(1)) {
@@ -56,7 +57,7 @@ public class FileController {
      * Step 2 of upload: client finished uploading to Supabase, save metadata and deduct credit.
      */
     @PostMapping("/upload/finalize")
-    public ResponseEntity<?> finalizeUpload(@RequestBody FinalizeUploadDTO dto) {
+    public ResponseEntity<?> finalizeUpload(@Valid @RequestBody FinalizeUploadDTO dto) {
         String clerkId = profileService.getCurrentProfile().getClerkId();
 
         // 10-year signed URL for persistent access; generate fresh on download

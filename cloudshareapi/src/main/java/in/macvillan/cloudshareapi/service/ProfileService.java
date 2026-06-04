@@ -4,12 +4,14 @@ import in.macvillan.cloudshareapi.document.ProfileDocument;
 import in.macvillan.cloudshareapi.dto.ProfileDTO;
 import in.macvillan.cloudshareapi.repository.ProfileRepository;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.time.Instant;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class ProfileService {
@@ -32,6 +34,7 @@ public class ProfileService {
                 .createdAt(Instant.now())
                 .build();
 
+        log.info("Creating new profile: clerkId={}", profileDTO.getClerkId());
         profile = profileRepository.save(profile);
 
         return ProfileDTO.builder()
@@ -108,6 +111,7 @@ public class ProfileService {
             return profile;
         }
 
+        log.warn("Profile not found for clerkId={}, creating fallback", clerkId);
         ProfileDocument fallbackProfile = ProfileDocument.builder()
                 .clerkId(clerkId)
                 .email(clerkId + "@clerk.local")

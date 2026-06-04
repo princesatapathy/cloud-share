@@ -3,6 +3,7 @@ package in.macvillan.cloudshareapi.controller;
 import in.macvillan.cloudshareapi.dto.PaymentDTO;
 import in.macvillan.cloudshareapi.dto.PaymentVerificationDTO;
 import in.macvillan.cloudshareapi.service.PaymentService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -18,7 +19,7 @@ public class PaymentController {
     private final PaymentService paymentService;
 
     @PostMapping("/create-order")
-    public ResponseEntity<?> createOrder(@RequestBody PaymentDTO paymentDTO) {
+    public ResponseEntity<?> createOrder(@Valid @RequestBody PaymentDTO paymentDTO) {
         PaymentDTO response = paymentService.createOrder(paymentDTO);
 
         if (response.getSuccess()) {
@@ -29,7 +30,7 @@ public class PaymentController {
     }
 
     @PostMapping("/verify-payment")
-    public ResponseEntity<?> verifyPayment(@RequestBody PaymentVerificationDTO request) {
+    public ResponseEntity<?> verifyPayment(@Valid @RequestBody PaymentVerificationDTO request) {
        PaymentDTO response = paymentService.verifyPayment(request);
         if (response.getSuccess()) {
             return ResponseEntity.ok(response);

@@ -70,6 +70,17 @@
 			<artifactId>razorpay-java</artifactId>
 			<version>1.4.3</version>
 		</dependency>
+		<!-- Bean Validation: @NotBlank, @NotNull, @Positive -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-validation</artifactId>
+		</dependency>
+		<!-- Testing: JUnit 5, Mockito, AssertJ -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+		</dependency>
 	</dependencies>
 
 	<build>
