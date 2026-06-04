@@ -1,5 +1,6 @@
 package in.macvillan.cloudshareapi.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -18,6 +19,8 @@ public class FileMetadataDTO {
     private Long size;
     private String clerkId;
     private Boolean isPublic;
-    private String fileLocation;
+    @JsonIgnore
+    private String supabasePath;   // internal — never sent to client
+    private String fileUrl;        // sent to client for download/preview
     private LocalDateTime uploadedAt;
 }

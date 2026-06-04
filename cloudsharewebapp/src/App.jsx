@@ -38,7 +38,7 @@ const App = () => {
                     <Route path="/transactions" element={
                         protectedRoute(<Transactions />)
                     } />
-                    <Route path="file/:fileId" element={
+                    <Route path="/file/:fileId" element={
                         <>
                             <PublicFileView />
                         </>

@@ -30,14 +30,13 @@ const MyFiles = () => {
     const fetchFiles = async () => {
         try {
             const token = await getToken();
-            console.log(token);
             const response = await axios.get(apiEndpoints.FETCH_FILES, {headers: {Authorization: `Bearer ${token}`}});
             if (response.status === 200) {
                 setFiles(response.data);
             }
         }catch (error) {
             console.error('Error fetching the files from server: ', error);
-            toast.error('Error fetching the files from server: ', error.message);
+            toast.error(`Error fetching the files from server: ${error.message}`);
         }
     }
 
@@ -50,7 +49,7 @@ const MyFiles = () => {
             setFiles(files.map((file) => file.id === fileToUpdate.id ? {...file, isPublic: !file.isPublic}: file));
         }catch (error) {
             console.error('Error toggling file status', error);
-            toast.error('Error toggling file status: ', error.message);
+            toast.error(`Error toggling file status: ${error.message}`);
         }
     }
 
@@ -71,7 +70,7 @@ const MyFiles = () => {
             window.URL.revokeObjectURL(url); // clean up the object url
         }catch (error) {
             console.error('Download failed', error);
-            toast.error('Error downloading file', error.message);
+            toast.error(`Error downloading file: ${error.message}`);
         }
     }
 
@@ -126,7 +125,7 @@ const MyFiles = () => {
             }
         }catch (error) {
             console.error('Error deleting file', error);
-            toast.error('Error deleting file', error.message);
+            toast.error(`Error deleting file: ${error.message}`);
         }
     }
 

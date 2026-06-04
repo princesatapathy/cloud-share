@@ -1,7 +1,7 @@
 import { ArrowUpFromLine, X, FileIcon, Loader2 } from 'lucide-react';
 import { useRef } from 'react';
 
-const UploadBox = ({ files, onFileChange, onUpload, uploading, onRemoveFile, remainingCredits, isUploadDisabled }) => {
+const UploadBox = ({ files, onFileChange, onUpload, uploading, onRemoveFile, remainingCredits, isUploadDisabled, fileProgress = {} }) => {
     const fileInputRef = useRef(null);
 
     const handleDragOver = (e) => {
@@ -77,11 +77,19 @@ const UploadBox = ({ files, onFileChange, onUpload, uploading, onRemoveFile, rem
                     <div className="bg-white rounded-lg border border-gray-200 overflow-hidden">
                         {files.map((file, index) => (
                             <div key={index} className="flex items-center justify-between p-3 border-b last:border-b-0 hover:bg-gray-50">
-                                <div className="flex items-center gap-3">
-                                    <FileIcon size={18} className="text-blue-600" />
-                                    <div>
-                                        <p className="text-sm font-medium text-gray-800">{file.name}</p>
+                                <div className="flex items-center gap-3 flex-1 min-w-0">
+                                    <FileIcon size={18} className="text-blue-600 shrink-0" />
+                                    <div className="flex-1 min-w-0">
+                                        <p className="text-sm font-medium text-gray-800 truncate">{file.name}</p>
                                         <p className="text-xs text-gray-500">{formatFileSize(file.size)}</p>
+                                        {fileProgress[file.name] !== undefined && (
+                                            <div className="w-full bg-gray-200 rounded-full h-1 mt-1">
+                                                <div
+                                                    className="bg-blue-500 h-1 rounded-full transition-all duration-150"
+                                                    style={{ width: `${fileProgress[file.name]}%` }}
+                                                />
+                                            </div>
+                                        )}
                                     </div>
                                 </div>
                                 <button

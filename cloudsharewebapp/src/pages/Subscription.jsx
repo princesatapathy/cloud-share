@@ -165,7 +165,7 @@ const Subscription = () => {
                 },
                 prefill: {
                     name: user.fullName,
-                    email: user.primaryEmailAddress
+                    email: user.primaryEmailAddress?.emailAddress
                 },
                 theme: {
                     color: "#3B82F6"

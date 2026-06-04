@@ -4,6 +4,7 @@ import {useContext, useEffect, useState} from "react";
 import {UserCreditsContext} from "../context/UserCreditsContext.jsx";
 import axios from "axios";
 import {apiEndpoints} from "../util/apiEndpoints.js";
+import {supabase} from "../util/supabaseClient.js";
 import {Loader2} from "lucide-react";
 import DashboardUpload from "../components/DashboardUpload.jsx";
 import RecentFiles from "../components/RecentFiles.jsx";
@@ -74,6 +75,29 @@ const Dashboard = () => {
         setRemainingUploads(MAX_FILES - uploadFiles.length);
     }, [uploadFiles]);
 
+    // Upload a single file via Supabase: initiate → direct upload → finalize
+    const uploadSingleFile = async (file, token) => {
+        const { data: initData } = await axios.post(
+            apiEndpoints.INITIATE_UPLOAD,
+            { fileName: file.name, mimeType: file.type, fileSize: file.size },
+            { headers: { Authorization: `Bearer ${token}` } }
+        );
+        const { token: signedToken, supabasePath } = initData;
+
+        const { error } = await supabase.storage
+            .from(import.meta.env.VITE_SUPABASE_BUCKET)
+            .uploadToSignedUrl(supabasePath, signedToken, file, { contentType: file.type });
+
+        if (error) throw new Error(error.message);
+
+        const { data: finalizeData } = await axios.post(
+            apiEndpoints.FINALIZE_UPLOAD,
+            { supabasePath, name: file.name, type: file.type, size: file.size },
+            { headers: { Authorization: `Bearer ${token}` } }
+        );
+        return finalizeData;
+    };
+
     // Handle file upload
     const handleUpload = async () => {
         if (uploadFiles.length === 0) {
@@ -81,7 +105,6 @@ const Dashboard = () => {
             setMessageType('error');
             return;
         }
-
         if (uploadFiles.length > MAX_FILES) {
             setMessage(`You can only upload a maximum of ${MAX_FILES} files at once.`);
             setMessageType('error');
@@ -92,37 +115,31 @@ const Dashboard = () => {
         setMessage('Uploading files...');
         setMessageType('info');
 
-        const formData = new FormData();
-        uploadFiles.forEach(file => formData.append('files', file));
-
         try {
             const token = await getToken();
-            const response = await axios.post(apiEndpoints.UPLOAD_FILE, formData, {
-                headers: {
-                    'Authorization': `Bearer ${token}`,
-                    'Content-Type': 'multipart/form-data'
-                }
-            });
+            let successCount = 0;
 
-            setMessage('Files uploaded successfully!');
+            for (const file of uploadFiles) {
+                try {
+                    await uploadSingleFile(file, token);
+                    successCount++;
+                } catch (err) {
+                    console.error(`Error uploading ${file.name}:`, err);
+                }
+            }
+
+            setMessage(`${successCount} file(s) uploaded successfully!`);
             setMessageType('success');
             setUploadFiles([]);
 
-            // Refresh the recent files list
+            // Refresh recent files + credits
             const res = await axios.get(apiEndpoints.FETCH_FILES, {
-                headers: {
-                    'Authorization': `Bearer ${token}`,
-                }
+                headers: { Authorization: `Bearer ${token}` }
             });
-
-            // Sort by uploadedAt and take only the 5 most recent files
-            const sortedFiles = res.data.sort((a, b) =>
-                new Date(b.uploadedAt) - new Date(a.uploadedAt)
-            ).slice(0, 5);
-
+            const sortedFiles = res.data
+                .sort((a, b) => new Date(b.uploadedAt) - new Date(a.uploadedAt))
+                .slice(0, 5);
             setFiles(sortedFiles);
-
-            // Refresh user credits immediately after successful upload
             await fetchUserCredits();
         } catch (error) {
             console.error('Error uploading files:', error);

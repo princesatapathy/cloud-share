@@ -6,7 +6,9 @@ export const apiEndpoints = {
     TOGGLE_FILE: (id) => `${BASE_URL}/files/${id}/toggle-public`,
     DOWNLOAD_FILE: (id) => `${BASE_URL}/files/download/${id}`,
     DELETE_FILE: (id) => `${BASE_URL}/files/${id}`,
-    UPLOAD_FILE: `${BASE_URL}/files/upload`,
+    // Chunked upload via Supabase: initiate → upload direct → finalize
+    INITIATE_UPLOAD: `${BASE_URL}/files/upload/initiate`,
+    FINALIZE_UPLOAD: `${BASE_URL}/files/upload/finalize`,
     CREATE_ORDER: `${BASE_URL}/payments/create-order`,
     VERIFY_PAYMENT: `${BASE_URL}/payments/verify-payment`,
     TRANSACTIONS: `${BASE_URL}/transactions`,
