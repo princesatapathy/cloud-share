@@ -128,8 +128,13 @@ const Dashboard = () => {
                 }
             }
 
-            setMessage(`${successCount} file(s) uploaded successfully!`);
-            setMessageType('success');
+            if (successCount === 0) {
+                setMessage('Upload failed. Please try again.');
+                setMessageType('error');
+            } else {
+                setMessage(`${successCount} file(s) uploaded successfully!`);
+                setMessageType('success');
+            }
             setUploadFiles([]);
 
             // Refresh recent files + credits
