@@ -39,26 +39,26 @@ const UploadBox = ({ files, onFileChange, onUpload, uploading, onRemoveFile, rem
         <div className="w-full max-w-3xl mx-auto">
             <div className="flex items-center justify-between mb-2">
                 <div className="flex items-center gap-2">
-                    <ArrowUpFromLine className="text-blue-600" size={20} />
-                    <h2 className="text-lg font-medium">Upload Files</h2>
+                    <ArrowUpFromLine className="text-terracotta" size={20} />
+                    <h2 className="text-lg font-medium text-espresso">Upload Files</h2>
                 </div>
-                <div className="text-sm text-gray-500">
+                <div className="text-sm text-muted">
                     {remainingCredits} credits remaining
                 </div>
             </div>
 
             <div
-                className="border-dashed border-2 border-gray-300 rounded-lg p-8 text-center bg-white cursor-pointer hover:border-blue-500 transition-colors"
+                className="border-dashed border-2 border-warmborder rounded-xl p-8 text-center bg-surface cursor-pointer hover:border-terracotta transition-colors"
                 onDragOver={handleDragOver}
                 onDrop={handleDrop}
                 onClick={handleBrowseClick}
             >
                 <div className="flex flex-col items-center justify-center">
-                    <div className="p-3 rounded-full bg-blue-50 mb-4">
-                        <ArrowUpFromLine size={24} className="text-blue-600" />
+                    <div className="p-3 rounded-full bg-terracotta-soft mb-4">
+                        <ArrowUpFromLine size={24} className="text-terracotta" />
                     </div>
-                    <p className="text-gray-700 mb-1">Drag and drop files here</p>
-                    <p className="text-gray-500 text-sm mb-2">or click to browse ({remainingCredits} credits remaining)</p>
+                    <p className="text-ink mb-1">Drag and drop files here</p>
+                    <p className="text-muted text-sm mb-2">or click to browse ({remainingCredits} credits remaining)</p>
                     <input
                         ref={fileInputRef}
                         type="file"
@@ -73,19 +73,19 @@ const UploadBox = ({ files, onFileChange, onUpload, uploading, onRemoveFile, rem
 
             {files.length > 0 && (
                 <div className="mt-6">
-                    <h3 className="text-sm font-medium mb-2">Selected Files ({files.length})</h3>
-                    <div className="bg-white rounded-lg border border-gray-200 overflow-hidden">
+                    <h3 className="text-sm font-medium mb-2 text-espresso">Selected Files ({files.length})</h3>
+                    <div className="bg-surface rounded-xl border border-warmborder overflow-hidden">
                         {files.map((file, index) => (
-                            <div key={index} className="flex items-center justify-between p-3 border-b last:border-b-0 hover:bg-gray-50">
+                            <div key={index} className="flex items-center justify-between p-3 border-b border-warmborder last:border-b-0 hover:bg-cream">
                                 <div className="flex items-center gap-3 flex-1 min-w-0">
-                                    <FileIcon size={18} className="text-blue-600 shrink-0" />
+                                    <FileIcon size={18} className="text-terracotta shrink-0" />
                                     <div className="flex-1 min-w-0">
-                                        <p className="text-sm font-medium text-gray-800 truncate">{file.name}</p>
-                                        <p className="text-xs text-gray-500">{formatFileSize(file.size)}</p>
+                                        <p className="text-sm font-medium text-ink truncate">{file.name}</p>
+                                        <p className="text-xs text-muted">{formatFileSize(file.size)}</p>
                                         {fileProgress[file.name] !== undefined && (
-                                            <div className="w-full bg-gray-200 rounded-full h-1 mt-1">
+                                            <div className="w-full bg-warmborder rounded-full h-1 mt-1">
                                                 <div
-                                                    className="bg-blue-500 h-1 rounded-full transition-all duration-150"
+                                                    className="bg-terracotta h-1 rounded-full transition-all duration-150"
                                                     style={{ width: `${fileProgress[file.name]}%` }}
                                                 />
                                             </div>
@@ -97,7 +97,7 @@ const UploadBox = ({ files, onFileChange, onUpload, uploading, onRemoveFile, rem
                                         e.stopPropagation();
                                         onRemoveFile(index);
                                     }}
-                                    className="text-gray-400 hover:text-red-500 transition-colors"
+                                    className="text-muted hover:text-red-500 transition-colors"
                                     disabled={uploading}
                                 >
                                     <X size={18} />
@@ -113,7 +113,7 @@ const UploadBox = ({ files, onFileChange, onUpload, uploading, onRemoveFile, rem
                     <button
                         onClick={onUpload}
                         disabled={uploading || isUploadDisabled}
-                        className="w-full py-3 bg-blue-600 text-white rounded-md hover:bg-blue-700 disabled:opacity-50 flex items-center justify-center gap-2 transition-colors"
+                        className="w-full py-3 bg-terracotta text-white rounded-lg hover:bg-terracotta-dark disabled:opacity-50 flex items-center justify-center gap-2 transition-colors"
                     >
                         {uploading ? (
                             <>

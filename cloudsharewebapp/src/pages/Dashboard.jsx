@@ -158,13 +158,13 @@ const Dashboard = () => {
     return (
         <DashboardLayout activeMenu="Dashboard">
             <div className="p-6">
-                <h1 className="text-2xl font-bold mb-6">My Drive</h1>
-                <p className="text-gray-600 mb-6">Upload, manage, and share your files securely</p>
+                <h1 className="text-3xl font-semibold text-espresso mb-1">My Drive</h1>
+                <p className="text-muted mb-6">Upload, manage, and share your files securely</p>
                 {message && (
                     <div className={`mb-6 p-4 rounded-lg flex items-center gap-3 ${
                         messageType === 'error' ? 'bg-red-50 text-red-700' :
-                            messageType === 'success' ? 'bg-green-50 text-green-700' :
-                                'bg-purple-50 text-purple-700'
+                            messageType === 'success' ? 'bg-olive-soft text-olive' :
+                                'bg-terracotta-soft text-terracotta-dark'
                     }`}>
                         {message}
                     </div>
@@ -185,9 +185,9 @@ const Dashboard = () => {
                     {/*right column*/}
                     <div className="w-full md:w-[60%]">
                         {loading ? (
-                            <div className="bg-white rounded-lg shadow p-8 flex flex-col items-center justify-center min-h-[300px]">
-                                <Loader2 size={40} className="text-purple-500 animate-spin mb-4" />
-                                <p className="text-gray-500">Loading your files...</p>
+                            <div className="bg-surface border border-warmborder rounded-2xl shadow-sm p-8 flex flex-col items-center justify-center min-h-[300px]">
+                                <Loader2 size={40} className="text-terracotta animate-spin mb-4" />
+                                <p className="text-muted">Loading your files...</p>
                             </div>
                         ) : (
                             <RecentFiles files={files} />

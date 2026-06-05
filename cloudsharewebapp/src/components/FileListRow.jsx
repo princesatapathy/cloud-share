@@ -12,32 +12,32 @@ const FileListRow = ({ file, onDownload, onDelete, onTogglePublic, onShareLink, 
     const navigate = useNavigate();
 
     return (
-        <tr key={file.id} className="hover:bg-gray-50 transition-colors">
-            <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800">
+        <tr key={file.id} className="hover:bg-cream transition-colors">
+            <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-ink">
                 <div className="flex items-center gap-2">
                     {getFileIcon(file)}
                     {file.name}
                 </div>
             </td>
-            <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-600">
+            <td className="px-6 py-4 whitespace-nowrap text-sm text-muted">
                 {(file.size / 1024).toFixed(1)} KB
             </td>
-            <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-600">
+            <td className="px-6 py-4 whitespace-nowrap text-sm text-muted">
                 {new Date(file.uploadedAt).toLocaleDateString()}
             </td>
-            <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-600">
+            <td className="px-6 py-4 whitespace-nowrap text-sm text-muted">
                 <div className="flex items-center gap-4">
                     <button
                         onClick={() => onTogglePublic(file)}
                         className="flex items-center gap-2 cursor-pointer group">
                         {file.isPublic ? (
                             <>
-                                <Globe size={16} className="text-green-500" />
+                                <Globe size={16} className="text-olive" />
                                 <span className="group-hover:underline">Public</span>
                             </>
                         ) : (
                             <>
-                                <Lock size={16} className="text-gray-500" />
+                                <Lock size={16} className="text-muted" />
                                 <span className="group-hover:underline">Private</span>
                             </>
                         )}
@@ -45,7 +45,7 @@ const FileListRow = ({ file, onDownload, onDelete, onTogglePublic, onShareLink, 
                     {file.isPublic && (
                         <button
                             onClick={() => onShareLink(file.id)}
-                            className="flex items-center gap-2 cursor-pointer group text-blue-600">
+                            className="flex items-center gap-2 cursor-pointer group text-terracotta">
                             <Copy size={16} />
                             <span className="group-hover:underline">Share Link</span>
                         </button>
@@ -58,7 +58,7 @@ const FileListRow = ({ file, onDownload, onDelete, onTogglePublic, onShareLink, 
                         <button
                             onClick={() => onDownload(file)}
                             title="Download"
-                            className="text-gray-500 hover:text-blue-600">
+                            className="text-muted hover:text-terracotta">
                             <Download size={18} />
                         </button>
                     </div>
@@ -66,7 +66,7 @@ const FileListRow = ({ file, onDownload, onDelete, onTogglePublic, onShareLink, 
                         <button
                             onClick={() => onDelete(file.id)}
                             title="Delete"
-                            className="text-gray-500 hover:text-red-600">
+                            className="text-muted hover:text-red-600">
                             <Trash2 size={18} />
                         </button>
                     </div>
@@ -77,7 +77,7 @@ const FileListRow = ({ file, onDownload, onDelete, onTogglePublic, onShareLink, 
                                 title="View File"
                                 target="_blank"
                                 rel="noreferrer"
-                                className="text-gray-500 hover:text-blue-600">
+                                className="text-muted hover:text-terracotta">
                                 <Eye size={18} />
                             </a>
                         ) : (

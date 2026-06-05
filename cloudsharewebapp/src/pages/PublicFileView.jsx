@@ -80,18 +80,18 @@ const PublicFileView = () => {
 
     if (isLoading) {
         return (
-            <div className="flex justify-center items-center h-screen bg-gray-50">
-                <p className="text-gray-600">Loading file...</p>
+            <div className="flex justify-center items-center h-screen bg-cream">
+                <p className="text-muted">Loading file...</p>
             </div>
         );
     }
 
     if (error) {
         return (
-            <div className="flex justify-center items-center h-screen bg-gray-50">
-                <div className="text-center p-8 bg-white rounded-lg shadow-md">
+            <div className="flex justify-center items-center h-screen bg-cream">
+                <div className="text-center p-8 bg-surface border border-warmborder rounded-2xl shadow-sm">
                     <h2 className="text-xl font-semibold text-red-600">Error</h2>
-                    <p className="text-gray-600 mt-2">{error}</p>
+                    <p className="text-muted mt-2">{error}</p>
                 </div>
             </div>
         );
@@ -100,16 +100,16 @@ const PublicFileView = () => {
     if (!file) return null;
 
     return (
-        <div className="bg-gray-50 min-h-screen">
-            <header className="p-4 border-b bg-white">
+        <div className="bg-cream min-h-screen">
+            <header className="p-4 border-b border-warmborder bg-surface">
                 <div className="container mx-auto flex justify-between items-center">
                     <div className="flex items-center gap-2">
-                        <Share2 className="text-blue-600" />
-                        <span className="font-bold text-xl text-gray-800">CloudShare</span>
+                        <Share2 className="text-terracotta" />
+                        <span className="font-semibold text-xl text-espresso font-serif">Cloud Share</span>
                     </div>
                     <button
                         onClick={openShareModal}
-                        className="flex items-center gap-2 px-4 py-2 bg-blue-50 text-blue-600 rounded-lg hover:bg-blue-100 transition-colors"
+                        className="flex items-center gap-2 px-4 py-2 bg-terracotta-soft text-terracotta-dark rounded-lg hover:bg-terracotta/15 transition-colors"
                     >
                         <Copy size={18} />
                         Share Link
@@ -120,24 +120,24 @@ const PublicFileView = () => {
             {/* Main Content */}
             <main className="container mx-auto p-4 md:p-8 flex justify-center">
                 <div className="w-full max-w-3xl">
-                    <div className="bg-white border border-gray-200 rounded-lg shadow-sm p-8 text-center">
+                    <div className="bg-surface border border-warmborder rounded-2xl shadow-sm p-8 text-center">
                         <div className="flex justify-center mb-4">
-                            <div className="w-20 h-20 bg-blue-100 rounded-full flex items-center justify-center">
-                                <File size={40} className="text-blue-500" />
+                            <div className="w-20 h-20 bg-terracotta-soft rounded-full flex items-center justify-center">
+                                <File size={40} className="text-terracotta" />
                             </div>
                         </div>
 
-                        <h1 className="text-2xl font-semibold text-gray-800 break-words">
+                        <h1 className="text-2xl font-semibold text-espresso break-words">
                             {file.name}
                         </h1>
-                        <p className="text-sm text-gray-500 mt-2">
+                        <p className="text-sm text-muted mt-2">
                             {(file.size / 1024).toFixed(2)} KB
                             <span className="mx-2">&bull;</span>
                             Shared on {new Date(file.uploadedAt).toLocaleDateString()}
                         </p>
 
                         <div className="my-6">
-              <span className="inline-block bg-gray-100 text-gray-600 text-xs font-medium px-3 py-1 rounded-full uppercase">
+              <span className="inline-block bg-olive-soft text-olive text-xs font-medium px-3 py-1 rounded-full uppercase">
                 {file.type || "File"}
               </span>
                         </div>
@@ -145,39 +145,39 @@ const PublicFileView = () => {
                         <div className="flex justify-center gap-4 my-8">
                             <button
                                 onClick={handleDownload}
-                                className="flex items-center gap-2 px-6 py-3 bg-gray-800 text-white rounded-lg hover:bg-gray-900 transition-colors shadow"
+                                className="flex items-center gap-2 px-6 py-3 bg-terracotta text-white rounded-lg hover:bg-terracotta-dark transition-colors shadow-sm"
                             >
                                 <Download size={18} />
                                 Download File
                             </button>
                         </div>
 
-                        <hr className="my-8" />
+                        <hr className="my-8 border-warmborder" />
 
                         <div>
-                            <h3 className="text-lg font-semibold text-left text-gray-800 mb-4">
+                            <h3 className="text-lg font-semibold text-left text-espresso mb-4">
                                 File Information
                             </h3>
                             <div className="text-left text-sm space-y-3">
                                 <div className="flex justify-between">
-                                    <span className="text-gray-500">File Name:</span>
-                                    <span className="text-gray-800 font-medium break-all">
+                                    <span className="text-muted">File Name:</span>
+                                    <span className="text-ink font-medium break-all">
                     {file.name}
                   </span>
                                 </div>
                                 <div className="flex justify-between">
-                                    <span className="text-gray-500">File Type:</span>
-                                    <span className="text-gray-800 font-medium">{file.type}</span>
+                                    <span className="text-muted">File Type:</span>
+                                    <span className="text-ink font-medium">{file.type}</span>
                                 </div>
                                 <div className="flex justify-between">
-                                    <span className="text-gray-500">File Size:</span>
-                                    <span className="text-gray-800 font-medium">
+                                    <span className="text-muted">File Size:</span>
+                                    <span className="text-ink font-medium">
                     {(file.size / 1024).toFixed(2)} KB
                   </span>
                                 </div>
                                 <div className="flex justify-between">
-                                    <span className="text-gray-500">Shared:</span>
-                                    <span className="text-gray-800 font-medium">
+                                    <span className="text-muted">Shared:</span>
+                                    <span className="text-ink font-medium">
                     {new Date(file.uploadedAt).toLocaleDateString()}
                   </span>
                                 </div>
@@ -185,7 +185,7 @@ const PublicFileView = () => {
                         </div>
                     </div>
 
-                    <div className="mt-6 bg-blue-50 border border-blue-200 text-blue-800 p-4 rounded-lg flex items-center gap-4">
+                    <div className="mt-6 bg-terracotta-soft border border-terracotta/20 text-terracotta-dark p-4 rounded-2xl flex items-center gap-4">
                         <Info size={20} />
                         <p className="text-sm">
                             This file has been shared publicly. Anyone with this link can view

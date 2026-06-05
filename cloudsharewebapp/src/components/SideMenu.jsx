@@ -7,15 +7,15 @@ const SideMenu = ({activeMenu}) => {
     const {user} = useUser();
     const navigate = useNavigate();
     return (
-        <div className="w-64 h-[calc(100vh-61px)] bg-white border-r border-gray-200/50 p-5 sticky top-[61px] z-20">
+        <div className="w-64 h-[calc(100vh-61px)] bg-espresso border-r border-espresso-light p-5 sticky top-[61px] z-20">
 
-            <div className="flex flex-col items-center justify-center gap-3 mt-3 mb-7">
+            <div className="flex flex-col items-center justify-center gap-3 mt-3 mb-8">
                 {user?.imageUrl ? (
-                    <img src={user?.imageUrl || ""} alt="Profile image" className="w-20 h-20 bg-slate-400 rounded-full" />
+                    <img src={user?.imageUrl || ""} alt="Profile image" className="w-20 h-20 rounded-full ring-2 ring-terracotta/40" />
                 ): (
-                    <User className="w-20 h-20 text-xl" />
+                    <User className="w-20 h-20 text-cream/70" />
                 )}
-                <h5 className="text-gray-950 font-medium leading-6">
+                <h5 className="text-cream font-medium leading-6 font-serif">
                     {user?.fullName || ""}
                 </h5>
             </div>
@@ -23,10 +23,10 @@ const SideMenu = ({activeMenu}) => {
             {SIDE_MENU_DATA.map((item, index) => (
                 <button
                     key={`menu_${index}`}
-                    className={`w-full flex items-center gap-4 text-[15px] py-3 px-6 rounded-lg mb-3 transition-all duration-200 cursor-pointer ${activeMenu == item.label ? "bg-purple-500 text-white font-medium shadow-md hover:bg-purple-600": "hover:bg-gray-100"}`}
+                    className={`w-full flex items-center gap-4 text-[15px] py-3 px-5 rounded-lg mb-2 transition-all duration-200 cursor-pointer ${activeMenu == item.label ? "bg-terracotta text-white font-medium shadow-sm": "text-cream/70 hover:bg-espresso-light hover:text-cream"}`}
                     onClick={() => navigate(item.path)}
                 >
-                    <item.icon className="text-xl" />
+                    <item.icon size={20} />
                     {item.label}
                 </button>
             ))}

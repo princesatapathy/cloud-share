@@ -22,7 +22,7 @@ const Modal = ({
                    confirmText = "Confirm",
                    cancelText = "Cancel",
                    onConfirm,
-                   confirmButtonClass = "bg-purple-500 hover:bg-purple-600",
+                   confirmButtonClass = "bg-terracotta hover:bg-terracotta-dark",
                    size = "md"
                }) => {
     const modalRef = useRef(null);
@@ -88,15 +88,15 @@ const Modal = ({
         <div className="fixed inset-0 z-50 flex items-center justify-center overflow-y-auto backdrop-blur-sm bg-transparent">
             <div
                 ref={modalRef}
-                className={`${sizeClasses[size]} w-full bg-white rounded-lg shadow-xl transform transition-all`}
+                className={`${sizeClasses[size]} w-full bg-surface rounded-2xl shadow-xl border border-warmborder transform transition-all`}
             >
-                <div className="border-b border-gray-200">
+                <div className="border-b border-warmborder">
                     <div className="px-6 py-4 flex justify-between items-center">
-                        <h3 className="text-lg font-medium text-gray-900">{title}</h3>
+                        <h3 className="text-lg font-medium text-espresso">{title}</h3>
                         <button
                             type="button"
                             onClick={onClose}
-                            className="text-gray-400 hover:text-gray-500 focus:outline-none"
+                            className="text-muted hover:text-ink focus:outline-none"
                         >
                             <span className="sr-only">Close</span>
                             <svg className="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -110,18 +110,18 @@ const Modal = ({
                     {children}
                 </div>
 
-                <div className="px-6 py-4 border-t border-gray-200 flex justify-end space-x-3">
+                <div className="px-6 py-4 border-t border-warmborder flex justify-end space-x-3">
                     <button
                         type="button"
                         onClick={onClose}
-                        className="px-4 py-2 bg-gray-100 text-gray-700 rounded-md hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-purple-300"
+                        className="px-4 py-2 bg-cream text-ink rounded-lg hover:bg-warmborder focus:outline-none focus:ring-2 focus:ring-terracotta/30"
                     >
                         {cancelText}
                     </button>
                     <button
                         type="button"
                         onClick={onConfirm}
-                        className={`px-4 py-2 text-white rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 ${confirmButtonClass}`}
+                        className={`px-4 py-2 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-offset-2 ${confirmButtonClass}`}
                     >
                         {confirmText}
                     </button>

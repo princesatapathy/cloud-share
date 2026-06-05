@@ -8,7 +8,7 @@ const FileCard = ({file, onDelete, onTogglePublic, onDownload, onShareLink}) => 
         const extenstion = file.name.split('.').pop().toLowerCase();
 
         if (['jpg', 'jpeg', 'png', 'gif', 'svg', 'webp'].includes(extenstion)) {
-            return <Image size={24} className="text-purple-500" />
+            return <Image size={24} className="text-terracotta" />
         }
 
         if (['mp4', 'webm', 'mov', 'avi', 'mkv'].includes(extenstion)) {
@@ -41,19 +41,19 @@ const FileCard = ({file, onDelete, onTogglePublic, onDownload, onShareLink}) => 
         <div
             onMouseEnter={() => setShowActions(true)}
             onMouseLeave={() => setShowActions(false)}
-            className="relative group overflow-hidden rounded-xl bg-white shadow-md hover:shadow-lg transition-all duration-300 border border-gray-100">
+            className="relative group overflow-hidden rounded-2xl bg-surface shadow-sm hover:shadow-md transition-all duration-300 border border-warmborder">
             {/* File preview area */}
-            <div className="h-32 bg-gradient-to-br from-purple-50 to-indigo-50 flex items-center justify-center p-4">
+            <div className="h-32 bg-gradient-to-br from-terracotta-soft to-olive-soft flex items-center justify-center p-4">
                 {getFileIcon(file)}
             </div>
 
             {/* Public/private badgge*/}
             <div className="absolute top-2 right-2">
-                <div className={`rounded-full p-1.5 ${file.isPublic ? 'bg-green-100': 'bg-gray-100'}`} title={file.isPublic ? "Public": "Private"}>
+                <div className={`rounded-full p-1.5 ${file.isPublic ? 'bg-olive-soft': 'bg-cream'}`} title={file.isPublic ? "Public": "Private"}>
                     {file.isPublic ? (
-                        <Globe size={14} className="text-green-600" />
+                        <Globe size={14} className="text-olive" />
                     ): (
-                        <Lock size={14} className="text-gray-600" />
+                        <Lock size={14} className="text-muted" />
                     )}
                 </div>
             </div>
@@ -62,11 +62,11 @@ const FileCard = ({file, onDelete, onTogglePublic, onDownload, onShareLink}) => 
             <div className="p-4">
                 <div className="flex justify-between items-start">
                     <div className="overflow-hidden">
-                        <h3 title={file.name} className="font-medium text-gray-900 truncate">
+                        <h3 title={file.name} className="font-medium text-espresso truncate">
                             {file.name}
                         </h3>
-                        <p className="text-xs text-gray-500 mt-1">
-                            {formatFileSize(file.size)} . {formatDate(file.uploadedAt)}
+                        <p className="text-xs text-muted mt-1">
+                            {formatFileSize(file.size)} · {formatDate(file.uploadedAt)}
                         </p>
                     </div>
                 </div>
@@ -79,7 +79,7 @@ const FileCard = ({file, onDelete, onTogglePublic, onDownload, onShareLink}) => 
                         <button
                             onClick={() => onShareLink(file.id)}
                             title="Share Link"
-                            className="p-2 cursor-pointer bg-white/90 rounded-full hover:bg-white transition-colors text-purple-500 hover:text-purple-600">
+                            className="p-2 cursor-pointer bg-white/90 rounded-full hover:bg-white transition-colors text-terracotta hover:text-terracotta-dark">
                             <Copy size={18} />
                         </button>
                     )}

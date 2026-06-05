@@ -127,8 +127,8 @@ const Upload = () => {
                 {message && (
                     <div className={`mb-6 p-4 rounded-lg flex items-center gap-3 ${
                         messageType === 'error' ? 'bg-red-50 text-red-700' :
-                        messageType === 'success' ? 'bg-green-50 text-green-700' :
-                        'bg-blue-50 text-blue-700'
+                        messageType === 'success' ? 'bg-olive-soft text-olive' :
+                        'bg-terracotta-soft text-terracotta-dark'
                     }`}>
                         {messageType === 'error' && <AlertCircle size={20} />}
                         {message}

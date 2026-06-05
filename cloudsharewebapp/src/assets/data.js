@@ -3,37 +3,37 @@ import {CreditCard, Files, LayoutDashboard, Receipt, Upload} from "lucide-react"
 export const features = [
     {
         iconName: "ArrowUpCircle",
-        iconColor: "text-purple-500",
+        iconColor: "text-terracotta",
         title: "Easy File Upload",
         description: "Quickly upload your files with our intuitive drag-and-drop interface."
     },
     {
         iconName: "Shield",
-        iconColor: "text-green-500",
+        iconColor: "text-olive",
         title: "Secure Storage",
         description: "Your files are encrypted and stored securely in our cloud infrastructure."
     },
     {
         iconName: "Share2",
-        iconColor: "text-purple-500",
+        iconColor: "text-terracotta",
         title: "Simple Sharing",
         description: "Share files with anyone using secure links that you control."
     },
     {
         iconName: "CreditCard",
-        iconColor: "text-orange-500",
+        iconColor: "text-terracotta",
         title: "Flexible Credits",
         description: "Pay only for what you use with our credit-based system."
     },
     {
         iconName: "FileText",
-        iconColor: "text-red-500",
+        iconColor: "text-olive",
         title: "File Management",
         description: "Organize, preview, and manage your files from any device."
     },
     {
         iconName: "Clock",
-        iconColor: "text-indigo-500",
+        iconColor: "text-terracotta",
         title: "Transaction History",
         description: "Keep track of all your credit purchases and usage."
     }

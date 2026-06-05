@@ -58,8 +58,8 @@ const Transactions = () => {
         <DashboardLayout activeMenu="Transactions">
             <div className="p-6">
                 <div className="flex items-center gap-2 mb-6">
-                    <Receipt className="text-blue-600" />
-                    <h1 className="text-2xl font-bold">Transaction History</h1>
+                    <Receipt className="text-terracotta" />
+                    <h1 className="text-3xl font-semibold text-espresso">Transactions</h1>
                 </div>
 
                 {error && (
@@ -70,63 +70,63 @@ const Transactions = () => {
                 )}
 
                 {loading ? (
-                    <div className="flex justify-center items-center h-64">
-                        <Loader2 className="animate-spin mr-2" size={24} />
+                    <div className="flex justify-center items-center h-64 text-muted">
+                        <Loader2 className="animate-spin mr-2 text-terracotta" size={24} />
                         <span>Loading transactions...</span>
                     </div>
                 ): transactions.length === 0 ? (
-                    <div className="bg-gray-50 p-8 rounded-lg text-center">
-                        <Receipt size={48} className="mx-auto mb-4 text-gray-400" />
-                        <h3 className="text-lg font-medium text-gray-700 mb-2">
+                    <div className="bg-surface border border-warmborder p-8 rounded-2xl text-center">
+                        <Receipt size={48} className="mx-auto mb-4 text-terracotta/40" />
+                        <h3 className="text-lg font-medium text-espresso mb-2">
                             No Transactions Yet
                         </h3>
-                        <p className="text-gray-500">
+                        <p className="text-muted">
                             You haven't made any credit purchases yet. Visit the Subscription
                             page to buy credits.
                         </p>
                     </div>
                 ): (
                     <div className="overflow-x-auto">
-                        <table className="min-w-full bg-white rounded-lg overflow-hidden shadow">
-                            <thead className="bg-gray-50">
+                        <table className="min-w-full bg-surface border border-warmborder rounded-2xl overflow-hidden shadow-sm">
+                            <thead className="bg-cream">
                                 <tr>
-                                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                    <th className="px-6 py-3 text-left text-xs font-medium text-muted uppercase tracking-wider">
                                         Date
                                     </th>
-                                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                    <th className="px-6 py-3 text-left text-xs font-medium text-muted uppercase tracking-wider">
                                         Plan
                                     </th>
-                                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                    <th className="px-6 py-3 text-left text-xs font-medium text-muted uppercase tracking-wider">
                                         Amount
                                     </th>
-                                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                    <th className="px-6 py-3 text-left text-xs font-medium text-muted uppercase tracking-wider">
                                         Credits Added
                                     </th>
-                                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                    <th className="px-6 py-3 text-left text-xs font-medium text-muted uppercase tracking-wider">
                                         Payment ID
                                     </th>
                                 </tr>
                             </thead>
-                            <tbody className="divide-y divide-gray-200">
+                            <tbody className="divide-y divide-warmborder">
                             {transactions.map((transaction) => (
-                                <tr key={transaction.id} className="hover:bg-gray-50">
-                                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                                <tr key={transaction.id} className="hover:bg-cream transition-colors">
+                                    <td className="px-6 py-4 whitespace-nowrap text-sm text-ink">
                                         {formatDate(transaction.transactionDate)}
                                     </td>
-                                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                                    <td className="px-6 py-4 whitespace-nowrap text-sm text-ink">
                                         {transaction.planId === "premium"
                                             ? "Premium Plan"
                                             : transaction.planId === "ultimate"
                                                 ? "Ultimate Plan"
                                                 : "Basic Plan"}
                                     </td>
-                                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                                    <td className="px-6 py-4 whitespace-nowrap text-sm text-ink">
                                         {formatAmount(transaction.amount)}
                                     </td>
-                                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                                    <td className="px-6 py-4 whitespace-nowrap text-sm text-ink">
                                         {transaction.creditsAdded}
                                     </td>
-                                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 font-mono">
+                                    <td className="px-6 py-4 whitespace-nowrap text-sm text-muted font-mono">
                                         {transaction.paymentId
                                             ? transaction.paymentId.substring(0, 12) + "..."
                                             : "N/A"}

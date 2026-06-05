@@ -159,36 +159,36 @@ const MyFiles = () => {
         <DashboardLayout activeMenu="My Files">
             <div className="p-6">
                 <div className="flex justify-between items-center mb-6">
-                    <h2 className="text-2xl font-bold">My Files {files.length}</h2>
+                    <h2 className="text-3xl font-semibold text-espresso">My Files <span className="text-muted text-xl">{files.length}</span></h2>
                     <div className="flex items-center gap-3">
                         <List
                             onClick={() => setViewMode("list")}
                             size={24}
-                            className={`cursor-pointer transition-colors ${viewMode === 'list' ? 'text-blue-600': 'text-gray-400 hover:text-gray-600'}`} />
+                            className={`cursor-pointer transition-colors ${viewMode === 'list' ? 'text-terracotta': 'text-muted hover:text-ink'}`} />
                         <Grid
                             size={24}
                             onClick={() => setViewMode("grid")}
-                            className={`cursor-pointer transition-colors ${viewMode === 'grid' ? 'text-blue-600': 'text-gray-400 hover:text-gray-600'}`} />
+                            className={`cursor-pointer transition-colors ${viewMode === 'grid' ? 'text-terracotta': 'text-muted hover:text-ink'}`} />
                     </div>
                 </div>
 
                 {files.length === 0 ? (
-                    <div className="bg-white rounded-lg shadow p-12 flex flex-col items-center justify-center">
+                    <div className="bg-surface border border-warmborder rounded-2xl shadow-sm p-12 flex flex-col items-center justify-center">
                         <File
                             size={60}
-                            className="text-purple-300 mb-4"
+                            className="text-terracotta/40 mb-4"
                         />
-                        <h3 className="text-xl font-medium text-gray-700 mb-2">
+                        <h3 className="text-xl font-medium text-espresso mb-2">
                             No files uploaded yet
                         </h3>
-                        <p className="text-gray-500 text-center max-w-md mb-6">
-                            Start uploading files to see them listed here. you can upload
+                        <p className="text-muted text-center max-w-md mb-6">
+                            Start uploading files to see them listed here. You can upload
                             documents, images, and other files to share and manage them securely.
                         </p>
                         <button
                             onClick={() => navigate('/upload')}
-                            className="px-4 py-2 bg-purple-500 text-white rounded-md hover:bg-purple-600 transition-colors">
-                            Go to Upload
+                            className="px-5 py-2.5 bg-terracotta text-white rounded-lg hover:bg-terracotta-dark transition-colors">
+                            Upload your first file
                         </button>
                     </div>
                 ): viewMode === "grid" ? (
@@ -205,18 +205,18 @@ const MyFiles = () => {
                         ))}
                     </div>
                 ) : (
-                    <div className="overflow-x-auto bg-white rounded-lg shadow">
+                    <div className="overflow-x-auto bg-surface border border-warmborder rounded-2xl shadow-sm">
                         <table className="min-w-full">
-                            <thead className="bg-gray-50 border-b border-gray-200">
+                            <thead className="bg-cream border-b border-warmborder">
                             <tr>
-                                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Name</th>
-                                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Size</th>
-                                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Uploaded</th>
-                                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Sharing</th>
-                                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
+                                <th className="px-6 py-3 text-left text-xs font-medium text-muted uppercase tracking-wider">Name</th>
+                                <th className="px-6 py-3 text-left text-xs font-medium text-muted uppercase tracking-wider">Size</th>
+                                <th className="px-6 py-3 text-left text-xs font-medium text-muted uppercase tracking-wider">Uploaded</th>
+                                <th className="px-6 py-3 text-left text-xs font-medium text-muted uppercase tracking-wider">Sharing</th>
+                                <th className="px-6 py-3 text-left text-xs font-medium text-muted uppercase tracking-wider">Actions</th>
                             </tr>
                             </thead>
-                            <tbody className="divide-y divide-gray-200">
+                            <tbody className="divide-y divide-warmborder">
                                 {files.map((file) => (
                                     <FileListRow
                                         key={file.id}
