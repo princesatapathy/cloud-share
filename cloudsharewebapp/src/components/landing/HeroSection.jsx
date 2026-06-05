@@ -3,36 +3,63 @@ import {SignInButton, SignUpButton} from "@clerk/react";
 const HeroSection = () => {
     return (
         <div className="landing-page-content relative">
-            <div className="absolute inset-0 bg-gradient-to-br from-terracotta-soft via-cream to-olive-soft opacity-70 z-0 pointer-events-none"></div>
+            <div className="absolute inset-0 bg-gradient-to-br from-terracotta-soft via-cream to-olive-soft opacity-60 z-0 pointer-events-none"></div>
+
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-                <div className="pt-20 pb-16 sm:pt-24 sm:pb-20 lg:pt-32 lg:pb-28">
-                    <div className="text-center">
-                        <h1 className="text-4xl tracking-tight font-semibold text-espresso sm:text-5xl md:text-6xl leading-tight">
-                            <span className="block">Share your files,</span>
-                            <span className="block text-terracotta italic">beautifully.</span>
-                        </h1>
-                        <p className="mt-5 max-w-md mx-auto text-base text-muted sm:text-lg md:mt-6 md:text-xl md:max-w-2xl">
-                            A premium storage space designed for clarity and focus. Upload, manage, and share your files with the elegance they deserve.
-                        </p>
-                        <div className="mt-10 max-w-sm mx-auto sm:max-w-none sm:flex sm:justify-center">
-                            <div className="space-y-4 sm:space-y-0 sm:mx-auto sm:inline-grid sm:grid-cols-2 sm:gap-5">
+                <div className="pt-20 pb-20 sm:pt-24 lg:pt-28 lg:pb-28">
+                    <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+
+                        {/* Left — copy */}
+                        <div>
+                            <p className="text-xs font-semibold tracking-[0.2em] uppercase text-terracotta mb-5">
+                                Elevate your workflow
+                            </p>
+                            <h1 className="text-5xl md:text-6xl font-semibold text-espresso leading-[1.05]">
+                                Share your files,
+                                <span className="block text-terracotta italic">beautifully</span>
+                            </h1>
+                            <p className="mt-6 max-w-lg text-lg text-muted leading-relaxed">
+                                A premium editorial storage space designed for clarity and focus.
+                                Ditch the clutter and present your assets with the elegance they deserve.
+                            </p>
+                            <div className="mt-9 flex flex-wrap gap-4">
                                 <SignUpButton mode="modal">
-                                    <button
-                                        className="flex items-center justify-center px-6 py-3 text-base font-medium rounded-lg text-white bg-terracotta hover:bg-terracotta-dark md:py-4 md:text-lg md:px-10 transition-all duration-200 shadow-sm hover:shadow-md">Get Started</button>
+                                    <button className="px-7 py-3 text-base font-medium rounded-lg text-white bg-terracotta hover:bg-terracotta-dark transition-all duration-200 shadow-sm hover:shadow-md">
+                                        Start Sharing
+                                    </button>
                                 </SignUpButton>
                                 <SignInButton mode="modal">
-                                    <button
-                                        className="flex items-center justify-center px-6 py-3 border border-warmborder text-base font-medium rounded-lg text-ink bg-surface hover:bg-cream md:py-4 md:text-lg md:px-10 transition-all duration-200">Sign In</button>
+                                    <button className="px-7 py-3 text-base font-medium rounded-lg text-ink bg-surface border border-warmborder hover:bg-cream transition-all duration-200">
+                                        Sign In
+                                    </button>
                                 </SignInButton>
                             </div>
                         </div>
-                    </div>
-                </div>
 
-                <div className="mt-8 text-center">
-                    <p className="mt-4 text-base text-muted">
-                        All your files are encrypted and stored securely with enterprise-grade security protocols.
-                    </p>
+                        {/* Right — editorial visual (CSS arch + light) */}
+                        <div className="relative">
+                            <div className="relative aspect-[4/3] rounded-2xl overflow-hidden border border-warmborder shadow-sm bg-gradient-to-br from-[#E8D3C4] via-terracotta-soft to-cream">
+                                {/* back arch */}
+                                <div className="absolute bottom-0 left-[18%] w-[34%] h-[78%] rounded-t-full bg-[#D9A98C]"></div>
+                                {/* front arch */}
+                                <div className="absolute bottom-0 left-[44%] w-[30%] h-[64%] rounded-t-full bg-terracotta"></div>
+                                {/* floor line */}
+                                <div className="absolute bottom-[14%] left-0 right-0 h-px bg-espresso/10"></div>
+                                {/* diagonal light beam */}
+                                <div className="absolute -inset-1 bg-gradient-to-tr from-espresso/25 via-transparent to-cream/50 mix-blend-multiply"></div>
+                                <div className="absolute inset-0 bg-gradient-to-bl from-white/30 via-transparent to-transparent"></div>
+                            </div>
+                            {/* soft offset shadow accent */}
+                            <div className="absolute -z-10 -bottom-4 -right-4 w-2/3 h-2/3 rounded-2xl bg-olive-soft"></div>
+                        </div>
+
+                    </div>
+
+                    <div className="mt-16 text-center">
+                        <p className="text-base text-muted">
+                            All your files are encrypted and stored securely with enterprise-grade security protocols.
+                        </p>
+                    </div>
                 </div>
             </div>
         </div>
