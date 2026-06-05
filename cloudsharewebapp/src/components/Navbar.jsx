@@ -1,9 +1,10 @@
 import {useContext, useEffect, useState} from "react";
-import {Menu, Share2, X} from "lucide-react";
+import {Menu, X} from "lucide-react";
 import {Link} from "react-router-dom";
 import {Show, UserButton} from "@clerk/react";
 import SideMenu from "./SideMenu.jsx";
 import CreditsDisplay from "./CreditsDisplay.jsx";
+import Logo from "./Logo.jsx";
 import {UserCreditsContext} from "../context/UserCreditsContext.jsx";
 
 const Navbar = ({activeMenu}) => {
@@ -28,8 +29,8 @@ const Navbar = ({activeMenu}) => {
                     )}
                 </button>
 
-                <div className="flex items-center gap-2">
-                    <Share2 className="text-terracotta" size={22} />
+                <div className="flex items-center gap-2.5">
+                    <Logo size={30} />
                     <span className="text-xl font-semibold text-espresso truncate font-serif">
                         Cloud Share
                     </span>

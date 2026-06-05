@@ -4,8 +4,9 @@ import {useAuth} from "@clerk/react";
 import axios from "axios";
 import {apiEndpoints} from "../util/apiEndpoints.js";
 import toast from "react-hot-toast";
-import {Copy, Download, File, Info, Share2} from "lucide-react";
+import {Copy, Download, File, Info} from "lucide-react";
 import LinkShareModal from "../components/LinkShareModal.jsx";
+import Logo from "../components/Logo.jsx";
 
 const PublicFileView = () => {
     const [file, setFile] = useState(null);
@@ -103,8 +104,8 @@ const PublicFileView = () => {
         <div className="bg-cream min-h-screen">
             <header className="p-4 border-b border-warmborder bg-surface">
                 <div className="container mx-auto flex justify-between items-center">
-                    <div className="flex items-center gap-2">
-                        <Share2 className="text-terracotta" />
+                    <div className="flex items-center gap-2.5">
+                        <Logo size={30} />
                         <span className="font-semibold text-xl text-espresso font-serif">Cloud Share</span>
                     </div>
                     <button
