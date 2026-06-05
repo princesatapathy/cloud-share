@@ -1,20 +1,20 @@
 import {useUser} from "@clerk/react";
-import {User} from "lucide-react";
 import {SIDE_MENU_DATA} from "../assets/data.js";
 import {useNavigate} from "react-router-dom";
 
 const SideMenu = ({activeMenu}) => {
     const {user} = useUser();
     const navigate = useNavigate();
+
+    const initial = (user?.firstName?.[0] || user?.fullName?.[0] || "U").toUpperCase();
+
     return (
         <div className="w-64 h-[calc(100vh-61px)] bg-espresso border-r border-espresso-light p-5 sticky top-[61px] z-20">
 
             <div className="flex flex-col items-center justify-center gap-3 mt-3 mb-8">
-                {user?.imageUrl ? (
-                    <img src={user?.imageUrl || ""} alt="Profile image" className="w-20 h-20 rounded-full ring-2 ring-terracotta/40" />
-                ): (
-                    <User className="w-20 h-20 text-cream/70" />
-                )}
+                <div className="w-20 h-20 rounded-full flex items-center justify-center bg-gradient-to-br from-terracotta to-terracotta-dark ring-2 ring-terracotta/30 shadow-sm">
+                    <span className="text-3xl font-semibold text-cream font-serif">{initial}</span>
+                </div>
                 <h5 className="text-cream font-medium leading-6 font-serif">
                     {user?.fullName || ""}
                 </h5>
