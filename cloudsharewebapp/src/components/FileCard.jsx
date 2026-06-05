@@ -23,7 +23,7 @@ const FileCard = ({file, onDelete, onTogglePublic, onDownload, onShareLink}) => 
             return <FileText size={24} className="text-amber-500" />
         }
 
-        return <FileIcon size={24} className="text-purple-500" />
+        return <FileIcon size={24} className="text-olive" />
     }
 
     const formatFileSize = (bytes) => {

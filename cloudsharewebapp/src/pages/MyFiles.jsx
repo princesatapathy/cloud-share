@@ -137,7 +137,7 @@ const MyFiles = () => {
         const extenstion = file.name.split('.').pop().toLowerCase();
 
         if (['jpg', 'jpeg', 'png', 'gif', 'svg', 'webp'].includes(extenstion)) {
-            return <Image size={24} className="text-purple-500" />
+            return <Image size={24} className="text-terracotta" />
         }
 
         if (['mp4', 'webm', 'mov', 'avi', 'mkv'].includes(extenstion)) {
@@ -152,7 +152,7 @@ const MyFiles = () => {
             return <FileText size={24} className="text-amber-500" />
         }
 
-        return <FileIcon size={24} className="text-purple-500" />
+        return <FileIcon size={24} className="text-olive" />
     }
 
     return (
