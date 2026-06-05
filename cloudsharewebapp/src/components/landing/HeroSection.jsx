@@ -1,4 +1,3 @@
-import {assets} from "../../assets/assets.js";
 import {SignInButton, SignUpButton} from "@clerk/react";
 
 const HeroSection = () => {
@@ -28,13 +27,6 @@ const HeroSection = () => {
                             </div>
                         </div>
                     </div>
-                </div>
-
-                <div className="relative">
-                    <div className="aspect-w-16 rounded-lg shadow-xl overflow-hidden">
-                        <img src={assets.dashboard} alt="cloudshare dashboard" className="w-full h-full object-cover" />
-                    </div>
-                    <div className="absolute inset-0 bg-gradient-to-t from-black opacity-10 rounded-lg"></div>
                 </div>
 
                 <div className="mt-8 text-center">
