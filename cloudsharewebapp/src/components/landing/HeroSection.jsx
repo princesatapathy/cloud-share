@@ -1,6 +1,8 @@
+import {useState} from "react";
 import {SignInButton, SignUpButton} from "@clerk/react";
 
 const HeroSection = () => {
+    const [imgOk, setImgOk] = useState(true);
     return (
         <div className="landing-page-content relative">
             <div className="absolute inset-0 bg-gradient-to-br from-terracotta-soft via-cream to-olive-soft opacity-60 z-0 pointer-events-none"></div>
@@ -36,18 +38,25 @@ const HeroSection = () => {
                             </div>
                         </div>
 
-                        {/* Right — editorial visual (CSS arch + light) */}
+                        {/* Right — editorial visual (real photo with CSS arch fallback) */}
                         <div className="relative">
                             <div className="relative aspect-[4/3] rounded-2xl overflow-hidden border border-warmborder shadow-sm bg-gradient-to-br from-[#E8D3C4] via-terracotta-soft to-cream">
-                                {/* back arch */}
+                                {/* CSS arch fallback (shown if /hero.jpg missing) */}
                                 <div className="absolute bottom-0 left-[18%] w-[34%] h-[78%] rounded-t-full bg-[#D9A98C]"></div>
-                                {/* front arch */}
                                 <div className="absolute bottom-0 left-[44%] w-[30%] h-[64%] rounded-t-full bg-terracotta"></div>
-                                {/* floor line */}
                                 <div className="absolute bottom-[14%] left-0 right-0 h-px bg-espresso/10"></div>
-                                {/* diagonal light beam */}
                                 <div className="absolute -inset-1 bg-gradient-to-tr from-espresso/25 via-transparent to-cream/50 mix-blend-multiply"></div>
                                 <div className="absolute inset-0 bg-gradient-to-bl from-white/30 via-transparent to-transparent"></div>
+
+                                {/* Real hero photo — covers fallback when present */}
+                                {imgOk && (
+                                    <img
+                                        src="/hero.jpg"
+                                        alt="Warm editorial arches"
+                                        onError={() => setImgOk(false)}
+                                        className="absolute inset-0 w-full h-full object-cover"
+                                    />
+                                )}
                             </div>
                             {/* soft offset shadow accent */}
                             <div className="absolute -z-10 -bottom-4 -right-4 w-2/3 h-2/3 rounded-2xl bg-olive-soft"></div>
